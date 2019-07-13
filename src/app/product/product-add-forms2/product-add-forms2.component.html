@@ -1,0 +1,36 @@
+<h3>Yeni Ürün Ekle - Reactive </h3> 
+<form [formGroup]="productAddForm" (ngSubmit)="add()" class="form-group">
+  
+  <div class="form-group">
+    <input type="text" id="name" name="name" class="form-control" placeholder="Ürün Adı" formControlName="name">
+    <div class="alert alert-danger" *ngIf="productAddForm.get('name').hasError('required')&&productAddForm.get('name').dirty">Ürün Adı Zorunludur</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" id="description" name="description" class="form-control" placeholder="Ürün Açıklaması" formControlName="description">
+    <div class="alert alert-danger" *ngIf="productAddForm.get('description').hasError('required')&&productAddForm.get('description').dirty">Ürün Açıklaması Zorunludur</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" id="imageUrl" name="imageUrl" class="form-control" placeholder="Ürün Fotoğraf Yolu" formControlName="imageUrl">
+    <div class="alert alert-danger" *ngIf="productAddForm.get('imageUrl').hasError('required')&&productAddForm.get('imageUrl').dirty">Ürün Fotoğraf Yolu Zorunludur</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" id="price" name="price" class="form-control" placeholder="Ürün Fiyatı" formControlName="price">
+    <div class="alert alert-danger" *ngIf="productAddForm.get('price').hasError('required')&&productAddForm.get('price').dirty">Ürün Fotoğraf Yolu Zorunludur</div>
+  </div>
+
+  <div class="form-group">
+    <select  class="form-control" required id="categoryId" name="categoryId" formControlName="categoryId" >
+      <option *ngFor="let category of categories" 
+      [value]="category.id" >{{category.name}}</option>
+    </select>
+    <div *ngIf="productAddForm.get('categoryId').hasError('required')&&productAddForm.get('price').touched&&productAddForm.get('categoryId').invalid" class="alert alert-danger">
+      Kategori gereklidir
+    </div> 
+  </div>
+  
+  <button type="submit" class="btn btn-primary" [disabled]="productAddForm.invalid">Ürün Ekle</button>
+  
+</form>
